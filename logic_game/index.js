@@ -60,8 +60,8 @@ async function startGame() {
     const rl = createGameInterface();
     
     // Анимированное приветствие
-    await typeWriter("Добро пожаловать в игровое сражение");
-    await typeWriter("Ты готов показать кто тут лучший боец?", 40);
+    await typeWriter('Добро пожаловать в игровое сражение');
+    await typeWriter('Ты готов показать кто тут лучший боец?', 40);
     
     // Выбор расы с анимацией
     await typeWriter('\n=== ВЫБОР РАСЫ ===', 30);
@@ -76,12 +76,14 @@ async function startGame() {
     }
     
     let playerRace;
-    while (true) {
+    let isValidRace = false;
+
+    while (!isValidRace) {
         const input = await askQuestion(rl, '\nВыберите расу: ');
         playerRace = input.toLowerCase();
-        
+    
         if (RACES[playerRace]) {
-            break;
+            isValidRace = true;
         } else {
             await typeWriterColor('❌ Неправильная раса! Попробуйте еще раз.', chalk.red, 10);
         }
